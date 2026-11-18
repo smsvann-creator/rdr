@@ -123,6 +123,7 @@ body.in-tg .widget,body.in-tg .detail{padding-top:calc(14px + env(safe-area-inse
         <span>Radar</span>
         <span class="badge" id="badge" hidden></span>
         <span class="sp"></span>
+        <button class="bump" id="btnHome" title="Добавить на главный экран" hidden>＋</button>
         <button class="bump" id="btnBump">Bump</button>
       </header>
       <div class="sec">Входящие</div>
@@ -528,6 +529,9 @@ $('#btnBump').addEventListener('click', async () => {
   bump();
 });
 $('#btnBack').addEventListener('click', () => Nav.go('scrWidget'));
+// Ярлык на главный экран: вызывается только из нажатия пользователя
+if (TG?.addToHomeScreen) $('#btnHome').hidden = false;
+$('#btnHome').addEventListener('click', () => TG?.addToHomeScreen?.());
 $('#btnChat').addEventListener('click', () => openChat(state.users[state.selected]));
 $('#prev').addEventListener('click', () => Nav.step(-1));
 $('#next').addEventListener('click', () => Nav.step(1));
